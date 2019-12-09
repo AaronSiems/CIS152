@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CoinCollection>
+	<coin id="1">
+		<type>quarter</type>
+		<design>Washington</design>
+		<year>1963</year>
+		<mint type="xs:char">P</mint>
+		<silver>true</silver>
+		<error> </error>
+	</coin>
+	<coin id="2">
+		<type>quarter</type>
+		<design>Washington</design>
+		<year>1954</year>
+		<mint type="xs:char">D</mint>
+		<silver>true</silver>
+		<error> </error>
+	</coin>
+	<coin id="3">
+		<type>penny</type>
+		<design>Wheat</design>
+		<year>1930</year>
+		<mint type="xs:char">D</mint>
+		<steel>false</steel>
+		<copper>true</copper>
+		<error>DDO</error>
+	</coin>
+</CoinCollection>
