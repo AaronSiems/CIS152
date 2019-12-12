@@ -38,6 +38,7 @@ public class AddEditForm {
 	 * Launch the application.
 	 */
 	public static void NewAddEditForm() {
+		edit = false;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -115,9 +116,6 @@ public class AddEditForm {
 			}
 		});
 		btnCancel.setBounds(198, 449, 115, 29);
-		if(edit) {
-			btnCancel.setEnabled(false); //Disable the cancel button if editing a coin.
-		}
 		formAddEditACoin.getContentPane().add(btnCancel);
 		
 		comboCoinType = new JComboBox();
@@ -198,6 +196,10 @@ public class AddEditForm {
 		txtCreation.setBounds(15, 363, 298, 70);
 		formAddEditACoin.getContentPane().add(txtCreation);
 		
+		if(edit) {
+			btnCancel.setEnabled(false); //Disable the cancel button if editing a coin.
+		}
+		
 		
 		/*
 		 * Methods
@@ -266,7 +268,10 @@ public class AddEditForm {
 						Coin c = NCH.newCoin(type, year, mint, design, b1, b2, error);
 						MainForm.coinQ.add(c);
 						MainForm.updateQueue();
-						txtCreation.setText("Coin created succesfully");
+						txtCreation.setText("Coin created succesfully \n" + c.toString());
+						txtMint.setText("");
+						txtError.setText("");
+						txtYear.setText("");
 						if(edit) {//Auto-close if window was called from an edit
 							formAddEditACoin.dispose();
 						}

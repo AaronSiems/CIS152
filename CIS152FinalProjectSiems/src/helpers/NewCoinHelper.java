@@ -55,6 +55,8 @@ public class NewCoinHelper {
 			} else if (mint != 'S') { //S mint marks could be silver
 				valid = "This quarter cannot be silver unless it's an error.";
 			}
+		} else if (year < 1965 && !silver) {
+			valid = "This quarter should be silver unless it is an error.";
 		}
 		
 		return valid;
@@ -69,6 +71,8 @@ public class NewCoinHelper {
 			} else if (mint != 'S') { //S mint marks could be silver
 				valid = "This dime cannot be silver unless it's an error.";
 			}
+		} else if (year < 1965 && !silver) {
+			valid = "This dime should be silver unless it is an error.";
 		}
 		
 		return valid;

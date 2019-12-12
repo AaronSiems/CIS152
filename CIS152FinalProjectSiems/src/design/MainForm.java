@@ -26,6 +26,8 @@ import java.util.Queue;
 import java.awt.event.ActionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class MainForm {
 	
@@ -87,13 +89,15 @@ public class MainForm {
 		queueToAddDisplay.setBounds(15, 73, 350, 300);
 		MainForm.getContentPane().add(queueToAddDisplay);
 		
-		
+		System.out.println("==========================");
+		System.out.println("Coins found: ");
 		DefaultListModel collectionModel = new DefaultListModel();
 		c.forEach((coin) -> {
 			String coinString = coin.toString();
 			collectionModel.addElement(coinString);
 			System.out.println(coin.toString());
 		});
+		System.out.println("==========================");
 		
 		
 		JList collectionJList = new JList(collectionModel);
@@ -135,7 +139,8 @@ public class MainForm {
 		MainForm.getContentPane().add(editCoinButton);
 		
 		JComboBox sortComboBox = new JComboBox();
-		sortComboBox.setModel(new DefaultComboBoxModel(new String[] {"Sort By...", "Coin", "Year", "Mint", "Grade"}));
+		
+		sortComboBox.setModel(new DefaultComboBoxModel(new String[] {"Sort By...", "Coin", "Year"}));
 		sortComboBox.setBounds(463, 480, 169, 48);
 		MainForm.getContentPane().add(sortComboBox);
 		
@@ -184,8 +189,12 @@ public class MainForm {
 		
 		
 		btnRemoveCoin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
-				c.remove(collectionJList.getSelectedIndex());
+			public void actionPerformed(ActionEvent arg0) {	
+				int ind = collectionJList.getSelectedIndex();
+				if(ind == -1) {
+					return;
+				}
+				c.remove(ind);
 				//Update collection sudo-method
 				collectionModel.clear();
 				c.forEach((coin) -> {
@@ -194,14 +203,17 @@ public class MainForm {
 				});
 				collectionJList.setModel(collectionModel);
 				CLH.saveList(c);
+				collectionJList.setSelectedIndex(ind);
 			}
 		});
 		
 		commitQueueButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(!coinQ.isEmpty()) { //If not empty...
-					for(int i = 0; i < coinQ.size(); i++) {
-						c.add(coinQ.poll());
+					int sizeTemp = coinQ.size();
+					for(int i = 0; i < sizeTemp; i++) {
+						Coin CTA = coinQ.poll();
+						c.add(CTA);
 					}
 					//Update collection sudo-method
 					collectionModel.clear();
@@ -212,12 +224,15 @@ public class MainForm {
 					collectionJList.setModel(collectionModel);
 					CLH.saveList(c);
 					updateQueue();
-				}
+				}//else nothing
 			}
 		});
 		
 		editCoinButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(collectionJList.getSelectedIndex() == -1) {
+					return;
+				}
 				Coin tempCoin = c.get(collectionJList.getSelectedIndex()); //Store the coin to load into edit
 				c.remove(collectionJList.getSelectedIndex()); //Remove from list
 				AddEditForm aef = new AddEditForm();//Create the edit form
@@ -242,6 +257,27 @@ public class MainForm {
 				});
 				collectionJList.setModel(collectionModel);
 				//Do not save, commit queue will save it
+			}
+		});
+		
+		
+		sortComboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String sortType = sortComboBox.getSelectedItem().toString();
+				List<Coin> tempList = CLH.sortList(c, sortType);
+				c.clear();
+				for(int i = 0; i < tempList.size(); i++) {
+					c.add(tempList.get(i));
+				}
+				//Update collection sudo-method
+				collectionModel.clear();
+				c.forEach((coin) -> {
+					String coinString = coin.toString();
+					collectionModel.addElement(coinString);
+				});
+				collectionJList.setModel(collectionModel);
+				CLH.saveList(c);
 			}
 		});
 		

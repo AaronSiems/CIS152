@@ -1,6 +1,6 @@
 package classes;
 
-public abstract class Coin {
+public abstract class Coin{
 
 	protected char mint;
 	protected int year;
@@ -22,7 +22,7 @@ public abstract class Coin {
 		this.design = design;
 		this.error = error;
 	}
-	
+
 	
 	public char getMint() {
 		return mint;

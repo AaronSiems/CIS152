@@ -2,6 +2,8 @@ package helpers;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -56,7 +58,7 @@ public class CoinListHelper {
 					String error = newCoin.getElementsByTagName("error").item(0).getTextContent();
 					String sTemp = newCoin.getElementsByTagName("silver").item(0).getTextContent();
 					boolean silver;
-					if (sTemp == "true") {
+					if (sTemp.equals("true")) {
 						silver = true;
 					} else {
 						silver = false;
@@ -69,7 +71,7 @@ public class CoinListHelper {
 					String error = newCoin.getElementsByTagName("error").item(0).getTextContent();
 					String sTemp = newCoin.getElementsByTagName("silver").item(0).getTextContent();
 					boolean silver;
-					if (sTemp == "true") {
+					if (sTemp.equals("true")) {
 						silver = true;
 					} else {
 						silver = false;
@@ -82,7 +84,7 @@ public class CoinListHelper {
 					String error = newCoin.getElementsByTagName("error").item(0).getTextContent();
 					String sTemp = newCoin.getElementsByTagName("silver").item(0).getTextContent();
 					boolean silver;
-					if (sTemp == "true") {
+					if (sTemp.equals("true")) {
 						silver = true;
 					} else {
 						silver = false;
@@ -97,13 +99,13 @@ public class CoinListHelper {
 					String cTemp = newCoin.getElementsByTagName("copper").item(0).getTextContent();
 					boolean steel;
 					boolean copper;
-					if (sTemp == "true") {
+					if (sTemp.equals("true")) {
 						steel = true;
 					} else {
 						steel = false;
 					}
 					
-					if (cTemp == "true") {
+					if (cTemp.equals("true")) {
 						copper = true;
 					} else {
 						copper = false;
@@ -156,6 +158,84 @@ public class CoinListHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	
+	public List<Coin> sortList(List<Coin> c, String sort){
+		List<Coin> sortedList = new ArrayList<Coin>();
+		if(sort.equals("Coin")) {
+			int size = c.size();
+			int[] remove = new int[c.size()];
+			int count = 0;
+			//Pull out the quarters
+			for(int i = 0; i < size; i++) {
+				if(c.get(i).getClass().getCanonicalName().replace("classes.", "").equals("Quarter")) {
+					remove[count] = i;
+					count++;
+					sortedList.add(c.get(i));
+				}
+			}
+			for(int i = 0; i < count; i++) { //This remove will make the function take less time
+				c.remove(remove[i]-i);
+			}
+			//Pull out the dimes
+			count = 0;
+			size = c.size();
+			for(int i = 0; i < size; i++) {
+				if(c.get(i).getClass().getCanonicalName().replace("classes.", "").equals("Dime")) {
+					remove[count] = i;
+					count++;
+					sortedList.add(c.get(i));
+				}
+			}
+			for(int i = 0; i < count; i++) {
+				c.remove(remove[i]);
+			}
+			//Pull out the nickels
+			count = 0;
+			size = c.size();
+			for(int i = 0; i < size; i++) {
+				if(c.get(i).getClass().getCanonicalName().replace("classes.", "").equals("Nickel")) {
+					remove[count] = i;
+					count++;
+					sortedList.add(c.get(i));
+				}
+			}
+			for(int i = 0; i < count; i++) {
+				c.remove(remove[i]);
+			}
+			//Pull out the pennies
+			count = 0;
+			size = c.size();
+			for(int i = 0; i < size; i++) {
+				if(c.get(i).getClass().getCanonicalName().replace("classes.", "").equals("Penny")) {
+					remove[count] = i;
+					count++;
+					sortedList.add(c.get(i));
+				}
+			}
+			for(int i = 0; i < count; i++) {
+				c.remove(remove[i]);
+			}
+		} else if(sort.equals("Year")) {
+			Collections.sort(c, new Comparator<Coin>() 
+			{
+				@Override
+			     public int compare(Coin left, Coin right) {
+			    	 return Integer.valueOf(left.getYear()).compareTo(right.getYear());
+			      }
+			});
+			for(int i = 0; i < c.size(); i++) {
+				sortedList.add(c.get(i));
+			}
+		} else { //This runs when the forum is first loaded, just copies the list
+			for(int i = 0; i < c.size(); i++) {
+				sortedList.add(c.get(i));
+			}
+		}
+		
+		
+		return sortedList;
 	}
 
 	public String getFileLoc() {
