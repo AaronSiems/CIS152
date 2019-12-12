@@ -1,3 +1,23 @@
+/**************************************************************
+* Name        : Coin Collection - Final Project
+* Author      : Aaron Siems
+* Created     : 11/16/2019
+* Course      : CIS 152 Data Structures
+* Version     : 1.0
+* OS          : Windows 10
+* Copyright   : This is my own original work based on
+*               specifications issued by our instructor
+* Description : This program creates a gui for the user to add
+* 				coins to a queue that can then be added to a collection
+* 				for saving and/or sorting.
+*               Input:  Coins through a coin form
+*               Output: Sorted coin list, 
+*               		an xml files that stores the collection list (but not the queue).
+* Academic Honesty: I attest that this is my original work.
+* I have not used unauthorized source code, either modified or 
+* unmodified. I have not given other fellow student(s) access to
+* my program.         
+***************************************************************/
 package design;
 
 import java.awt.EventQueue;
@@ -28,6 +48,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.ListSelectionEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
+
 
 public class MainForm {
 	
@@ -285,6 +306,10 @@ public class MainForm {
 	
 	
 
+	/**
+	 * Called when the queue is updated
+	 * Updates the actual display
+	 */
 	public static void updateQueue() {
 		if(coinQ.isEmpty()) { //queue is empty, clear list
 			qList.clear();

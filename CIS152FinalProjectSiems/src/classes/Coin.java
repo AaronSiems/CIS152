@@ -1,5 +1,9 @@
 package classes;
 
+/**
+ * @author Aaron Siems
+ *
+ */
 public abstract class Coin{
 
 	protected char mint;
@@ -8,6 +12,12 @@ public abstract class Coin{
 	protected String error;
 	
 
+	/**
+	 * Creates a coin without an error
+	 * @param year
+	 * @param mint
+	 * @param design
+	 */
 	public Coin(int year, char mint, String design) {
 		super();
 		this.mint = mint;
@@ -15,6 +25,13 @@ public abstract class Coin{
 		this.design = design;
 	}
 	
+	/**
+	 * Creates a coin with an error
+	 * @param year
+	 * @param mint
+	 * @param design
+	 * @param error
+	 */
 	public Coin(int year, char mint, String design, String error) {
 		super();
 		this.mint = mint;

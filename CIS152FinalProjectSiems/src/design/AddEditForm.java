@@ -51,6 +51,16 @@ public class AddEditForm {
 		});
 	}
 	
+	/**
+	 * Launches the form as an edit form
+	 * @param type
+	 * @param year
+	 * @param mint
+	 * @param design
+	 * @param b1
+	 * @param b2
+	 * @param error
+	 */
 	public static void NewAddEditForm(String type, int year, char mint, String design, boolean b1, boolean b2, String error) {
 		edit = true;
 		EventQueue.invokeLater(new Runnable() {
@@ -286,7 +296,12 @@ public class AddEditForm {
 	}
 	
 	
-	//https://stackoverflow.com/questions/237159/whats-the-best-way-to-check-if-a-string-represents-an-integer-in-java
+	
+	/**
+	 * https://stackoverflow.com/questions/237159/whats-the-best-way-to-check-if-a-string-represents-an-integer-in-java
+	 * @param str
+	 * @return if the string is an int
+	 */
 	public static boolean isInteger(String str) {
 	    if (str == null) {
 	        return false;

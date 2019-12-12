@@ -13,12 +13,23 @@ import org.w3c.dom.Node;
 import classes.Coin;
 import classes.Penny;
 
+/**
+ * @author Aaron Siems
+ *
+ */
 public class XMLHelper {
 	
 	public XMLHelper() {
 		
 	}
 	
+	/**
+	 * Translates a coin into xml format.
+	 * @param doc
+	 * @param c
+	 * @param id
+	 * @return a node useable for writing to an xml file
+	 */
 	public Node newCoinNode(Document doc, Coin c, String id) {
 		Element coin = doc.createElement("coin");
 		
@@ -82,6 +93,10 @@ public class XMLHelper {
 		return coin;
 	}
 	
+	/**
+	 * Clears the file by deleting and re-creating it.
+	 * @param fileLoc
+	 */
 	public void resetFile(String fileLoc) {
 		File file = new File(fileLoc);
 		String fileStart = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -100,6 +115,11 @@ public class XMLHelper {
 		}	
 	}
 	
+	/**
+	 * Copies the file when the program starts
+	 * @param fileLoc
+	 * @param backupLoc
+	 */
 	public void backup(String fileLoc, String backupLoc) {
 		File file = new File(fileLoc);
 		File backup = new File(backupLoc);

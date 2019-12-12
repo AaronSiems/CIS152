@@ -6,6 +6,10 @@ import classes.Nickel;
 import classes.Penny;
 import classes.Quarter;
 
+/**
+ * @author Aaron Siems
+ *
+ */
 public class NewCoinHelper {
 
 	public NewCoinHelper() {
@@ -14,6 +18,16 @@ public class NewCoinHelper {
 	
 	
 	
+	/**
+	 * @param type
+	 * @param year
+	 * @param mint
+	 * @param design
+	 * @param b1
+	 * @param b2 - Only for pennies, pass false for the other 3
+	 * @param error
+	 * @return The specific type of coin based on inputs
+	 */
 	public Coin newCoin(String type, int year, char mint, String design, boolean b1, boolean b2, String error) {
 		if(type.toLowerCase().equals("quarter")) {
 			if (error == "") {
@@ -46,6 +60,14 @@ public class NewCoinHelper {
 	}
 	
 	//Validators - design var left in args in case I add validation for that too
+	
+	/**
+	 * @param year
+	 * @param mint
+	 * @param design
+	 * @param silver
+	 * @return Empty string for valid, error string if that type of coin didn't exist
+	 */
 	public String validateQuarter(int year, char mint, String design, boolean silver) {
 		String valid = "";
 		
@@ -62,6 +84,13 @@ public class NewCoinHelper {
 		return valid;
 	}
 	
+	/**
+	 * @param year
+	 * @param mint
+	 * @param design
+	 * @param silver
+	 * @return Empty string for valid, error string if that type of coin didn't exist
+	 */
 	public String validateDime(int year, char mint, String design, boolean silver) {
 		String valid = "";
 		
@@ -78,6 +107,13 @@ public class NewCoinHelper {
 		return valid;
 	}
 	
+	/**
+	 * @param year
+	 * @param mint
+	 * @param design
+	 * @param silver
+	 * @return Empty string for valid, error string if that type of coin didn't exist
+	 */
 	public String validateNickel(int year, char mint, String design, boolean silver) {
 		String valid = "";
 		
@@ -92,6 +128,14 @@ public class NewCoinHelper {
 		return valid;
 	}
 	
+	/**
+	 * @param year
+	 * @param mint
+	 * @param design
+	 * @param steel
+	 * @param copper
+	 * @return Empty string for valid, error string if that type of coin didn't exist
+	 */
 	public String validatePenny(int year, char mint, String design, boolean steel, boolean copper) {
 		String valid = "";
 		

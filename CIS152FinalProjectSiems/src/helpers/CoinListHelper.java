@@ -20,6 +20,10 @@ import org.w3c.dom.NodeList;
 
 import classes.Coin;
 
+/**
+ * @author Aaron Siems
+ *
+ */
 public class CoinListHelper {
 	
 	private String fileLoc;
@@ -29,6 +33,9 @@ public class CoinListHelper {
 		this.fileLoc = fileLoc;
 	}
 	
+	/**
+	 * @return a coin list based on the stored data in the xml file
+	 */
 	public List<Coin> loadList() {
 		List<Coin> c = new ArrayList<Coin>();
 		try {
@@ -123,6 +130,10 @@ public class CoinListHelper {
 		return c;
 	}
 	
+	/**
+	 * Saves coin list "c" to the specified xml file
+	 * @param c
+	 */
 	public void saveList(List<Coin> c) {
 		try {
 			XMLHelper XMLH = new XMLHelper();
@@ -136,7 +147,6 @@ public class CoinListHelper {
 			DocumentBuilderFactory DBF = DocumentBuilderFactory.newInstance();
 			DocumentBuilder DB = DBF.newDocumentBuilder();
 			Document doc = DB.newDocument();
-			//doc.getDocumentElement().normalize();
 			
 			
 			//Write file
@@ -161,6 +171,11 @@ public class CoinListHelper {
 	}
 	
 	
+	/**
+	 * @param c 
+	 * @param sort - Coin or Year, anything else will return c as is
+	 * @return a coin list sorted based on the sort type
+	 */
 	public List<Coin> sortList(List<Coin> c, String sort){
 		List<Coin> sortedList = new ArrayList<Coin>();
 		if(sort.equals("Coin")) {
